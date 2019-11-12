@@ -12,7 +12,7 @@ script:
 
 before_install:
   - 'sudo docker pull centos:7'
-  - 'sudo docker build --no-cache --rm --file=test/Dockerfile --tag=centos-7:ansible tests'
+  - 'sudo docker build --no-cache --rm --tag=centos-7:ansible tests'
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
