@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  roles:
+    - role: ansible-role-condor_client
+      iam:
+      - {client_id: "", client_secret: "", token: ""}
+      admin:
+      - {DN: ""}
+      condor:
+      - {host: "", schedd_name: ""}
+
+

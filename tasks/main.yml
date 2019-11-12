@@ -1,0 +1,38 @@
+---
+# tasks file for ansible-role-condor_client
+
+- name: download repos and keys
+  get_url: 
+    url: "{{ item.source }}"
+    dest: "{{ item.dest }}"
+  loop:
+    - { source: 'http://linuxsoft.cern.ch/wlcg/RPM-GPG-KEY-wlcg', dest: '/etc/pki/rpm-gpg/RPM-GPG-KEY-wlcg' }
+    - { source:  http://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-stable-rhel7.repo', dest: '/etc/yum.repos.d/htcondor-stable-rhel7.repo' }
+    - { source: 'http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor', dest: '/etc/pki/rpm-gpg/RPM-GPG-KEY-HTCondor' }
+    - { source: 'https://ci.cloud.cnaf.infn.it/view/dodas/job/ca_DODAS-TTS/job/master/lastSuccessfulBuild/artifact/ca_DODAS-TTS.repo', '/etc/yum.repos.d/ca_DODAS-TTS.repo'}
+
+- name: install packages
+  yum:
+    name:
+    - yum-plugin-ovl
+    - fetch-crl
+    - wn
+    - condor-all-8.8.2-1.el7
+    - ca_DODAS-TTS
+    state: present
+
+- name: Compile condor client config and utilities
+  template:
+    src: "{{ item.source }}"
+    dest: "{{ item.dest }}"
+  loop:
+    - { source: 'templates/condor_config', dest: '/etc/condor/condor_config' }
+    - { source: 'templates/get_proxy.py', dest: '/etc/condor/get_proxy.py' }
+
+- name: copy job example
+  copy:
+    src: "{{ item.source }}"
+    dest: "{{ item.dest }}"
+  loop:
+    - { source: 'files/simple-job.sh', dest: '/opt/simple-job.sh' }
+    - { source: 'files/simple-job.sub', dest: '/opt/simple-job.sub' }
