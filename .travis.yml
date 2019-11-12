@@ -1,35 +1,18 @@
 ---
-dist: xenial
-
 sudo: required
 
-language: python
-python: "2.7"
-
-before_install:
- - sudo apt-get update -qq
-
-addons:
-  apt:
-    packages:
-    - python-pip
-
-install:
-  # Check ansible version
-  - sudo pip install ansible
-
-  # Check ansible version
-  - ansible --version
-
-  # Create ansible.cfg with correct roles_path
-  - sudo printf '[defaults]\nroles_path=../' > ansible.cfg
+services:
+  - docker
 
 script:
-  # Basic role syntax check
-  - sudo ansible-playbook tests/test.yml -i tests/inventory --syntax-check
+- container_id=$(mktemp)
+- 'sudo docker run --detach --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --volume="${PWD}":/etc/ansible/roles/ansible-role-condor_client:ro ${distribution}-${version}:ansible > "${container_id}"'
+- 'sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/ansible-role-condor_client/test.yml -i /etc/ansible/roles/ansible-role-condor_client/tests/inventory --syntax-check'
+- 'sudo docker exec "$(cat ${container_id})" env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/ansible-role-condor_client/test.yml  -i /etc/ansible/roles/ansible-role-condor_client/tests/inventory'
 
-  # Basic role check
-  - sudo ansible-playbook tests/test.yml -i tests/inventory
+before_install:
+  - 'sudo docker pull ${distribution}:${version}'
+  - 'sudo docker build --no-cache --rm --file=test/Dockerfile --tag=centos-7:ansible travis'
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
