@@ -6,13 +6,13 @@ services:
 
 script:
 - container_id=$(mktemp)
-- 'sudo docker run --name centos-travis --detach --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --volume="${PWD}":/etc/ansible/roles/ansible-role-condor_client:ro centos-7:ansible'
+- 'sudo docker run --name centos-travis --detach --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --volume="${PWD}":/etc/ansible/roles/ansible-role-condor_client:ro dciangot/travis:centos sleep infinity'
 - 'sudo docker exec centos-travis env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/ansible-role-condor_client/tests/test.yml -i /etc/ansible/roles/ansible-role-condor_client/tests/inventory --syntax-check'
 - 'sudo docker exec  centos-travis env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/ansible-role-condor_client/tests/test.yml  -i /etc/ansible/roles/ansible-role-condor_client/tests/inventory'
 
 before_install:
-  - 'sudo docker pull centos:7'
-  - 'sudo docker build --no-cache --rm --tag=centos-7:ansible tests'
+  - 'sudo docker pull dciangot/travis:centos'
+#  - 'sudo docker build --no-cache --rm --tag=centos-7:ansible tests'
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
