@@ -15,7 +15,6 @@
 
 - name: install condorkey
   command: rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-HTCondor
-  warn: false
 
 - name: install packages
   yum:
