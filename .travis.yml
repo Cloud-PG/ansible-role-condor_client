@@ -5,7 +5,6 @@ services:
   - docker
 
 script:
-- container_id=$(mktemp)
 - 'sudo docker run --name centos-travis --detach --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --volume="${PWD}":/ansible-role-condor_client:ro dciangot/travis:centos sleep infinity'
 - 'sudo docker exec centos-travis env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /ansible-role-condor_client/tests/test.yml -i /ansible-role-condor_client/tests/inventory --syntax-check'
 - 'sudo docker exec  centos-travis env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /ansible-role-condor_client/tests/test.yml  -i /ansible-role-condor_client/tests/inventory'
