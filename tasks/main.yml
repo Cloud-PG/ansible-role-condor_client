@@ -13,6 +13,9 @@
     - { source: 'http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor', dest: '/etc/pki/rpm-gpg/RPM-GPG-KEY-HTCondor' }
     - { source: 'https://ci.cloud.cnaf.infn.it/view/dodas/job/ca_DODAS-TTS/job/master/lastSuccessfulBuild/artifact/ca_DODAS-TTS.repo',  dest: '/etc/yum.repos.d/ca_DODAS-TTS.repo'}
 
+- name: install condorkey
+  command: rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-HTCondor
+
 - name: install packages
   yum:
     name:
