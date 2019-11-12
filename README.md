@@ -1,4 +1,6 @@
-Role Name
+Ansible role for HTCondor client 
+![Travis build](https://travis-ci.org/Cloud-PG/ansible-role-condor_client.svg?branch=master)
+=========
 =========
 
 A brief description of the role goes here.
