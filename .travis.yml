@@ -6,7 +6,7 @@ services:
 
 script:
 - container_id=$(mktemp)
-- 'sudo docker run -name centos-travis --detach --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --volume="${PWD}":/etc/ansible/roles/ansible-role-condor_client:ro centos-7:ansible'
+- 'sudo docker run --name centos-travis --detach --privileged -v /sys/fs/cgroup:/sys/fs/cgroup:ro --volume="${PWD}":/etc/ansible/roles/ansible-role-condor_client:ro centos-7:ansible'
 - 'sudo docker exec centos-travis env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/ansible-role-condor_client/tests/test.yml -i /etc/ansible/roles/ansible-role-condor_client/tests/inventory --syntax-check'
 - 'sudo docker exec  centos-travis env ANSIBLE_FORCE_COLOR=1 ansible-playbook -v /etc/ansible/roles/ansible-role-condor_client/tests/test.yml  -i /etc/ansible/roles/ansible-role-condor_client/tests/inventory'
 
