@@ -3,10 +3,13 @@
   roles:
     - role: ansible-role-condor_client
       iam:
-      - {client_id: "", client_secret: "", token: ""}
+        client_id: ""
+        client_secret: ""
+        token: ""
       admin:
-      - {DN: ""}
+        DN: ""
       condor:
-      - {host: "", schedd_name: ""}
+        host: ""
+        schedd_name: ""
 
 
