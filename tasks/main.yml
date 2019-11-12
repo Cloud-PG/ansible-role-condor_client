@@ -8,6 +8,8 @@
   loop:
     - { source: 'http://linuxsoft.cern.ch/wlcg/RPM-GPG-KEY-wlcg', dest: '/etc/pki/rpm-gpg/RPM-GPG-KEY-wlcg' }
     - { source: 'http://research.cs.wisc.edu/htcondor/yum/repo.d/htcondor-stable-rhel7.repo', dest: '/etc/yum.repos.d/htcondor-stable-rhel7.repo' }
+    - { source: 'http://repository.egi.eu/community/software/preview.repository/2.0/releases/repofiles/centos-7-x86_64.repo', dest: '/etc/yum.repos.d/centos-7-x86_64.repo' }
+    - { source: 'http://linuxsoft.cern.ch/wlcg/wlcg-centos7.repo', dest: '/etc/yum.repos.d/wlcg-centos7.repo' }
     - { source: 'http://research.cs.wisc.edu/htcondor/yum/RPM-GPG-KEY-HTCondor', dest: '/etc/pki/rpm-gpg/RPM-GPG-KEY-HTCondor' }
     - { source: 'https://ci.cloud.cnaf.infn.it/view/dodas/job/ca_DODAS-TTS/job/master/lastSuccessfulBuild/artifact/ca_DODAS-TTS.repo',  dest: '/etc/yum.repos.d/ca_DODAS-TTS.repo'}
 
