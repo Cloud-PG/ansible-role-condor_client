@@ -1,7 +1,7 @@
 ---
 - hosts: localhost
   roles:
-    - role: ../ansible-role-condor_client
+    - role: ../
       iam:
       - {client_id: "", client_secret: "", token: ""}
       admin:
