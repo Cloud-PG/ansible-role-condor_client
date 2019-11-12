@@ -32,9 +32,6 @@ Vagrant.configure(2) do |config|
   config.vm.provision "ansible" do |ansible|
     ansible.verbose = "v"
     ansible.playbook = "tests/test.yml"
-    ansible.become = true
-    ansible.playbook_command = "ansible-playbook"
-    #ansible.galaxy_command = "ansible-galaxy install git+https://github.com/Cloud-PG/CachingOnDemand.git,ansible --force"
-
   end
+
 end
