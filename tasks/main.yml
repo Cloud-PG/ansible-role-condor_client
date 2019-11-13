@@ -2,6 +2,7 @@
 # tasks file for ansible-role-condor_client
 
 - name: download repos and keys
+  become: yes
   get_url: 
     url: "{{ item.source }}"
     dest: "{{ item.dest }}"
@@ -14,9 +15,11 @@
     - { source: 'https://ci.cloud.cnaf.infn.it/view/dodas/job/ca_DODAS-TTS/job/master/lastSuccessfulBuild/artifact/ca_DODAS-TTS.repo',  dest: '/etc/yum.repos.d/ca_DODAS-TTS.repo'}
 
 - name: install condorkey
+  become: yes
   command: rpm --import /etc/pki/rpm-gpg/RPM-GPG-KEY-HTCondor
 
 - name: install packages
+  become: yes
   yum:
     name:
     - yum-plugin-ovl
@@ -27,6 +30,7 @@
     state: present
 
 - name: Compile condor client config and utilities
+  become: yes
   template:
     src: "{{ item.source }}"
     dest: "{{ item.dest }}"
@@ -35,6 +39,7 @@
     - { source: 'templates/get_proxy.py', dest: '/etc/condor/get_proxy.py' }
 
 - name: copy job example
+  become: yes
   copy:
     src: "{{ item.source }}"
     dest: "{{ item.dest }}"
