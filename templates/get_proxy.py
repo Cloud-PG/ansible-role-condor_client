@@ -290,14 +290,16 @@ class ProxyManager(object):
 
 """Execute the get_proxy routine."""
 
+TOKEN = os.getenv("TOKEN")
+
 configuration = {
     'CREDENTIAL_ENDPOINT' : 'https://dodas-tts.cloud.cnaf.infn.it/api/v2/iam/credential',
     'IAM_ENDPOINT':'https://dodas-iam.cloud.cnaf.infn.it/',
     'TTS':'https://dodas-tts.cloud.cnaf.infn.it',
-    'IAM_CLIENT_ID': "{{ iam.client_id }}",
-    'IAM_CLIENT_SECRET': "{{ iam.client_secret }}",
+    'IAM_CLIENT_ID': "{{ tts.client_id }}",
+    'IAM_CLIENT_SECRET': "{{ tts.client_secret }}",
     'AUDIENCE' : 'https://dodas-tts.cloud.cnaf.infn.it',
-    'IAM_TOKEN': "{{ iam.token }}" }
+    'IAM_TOKEN': TOKEN }
 
 proxy_manager = ProxyManager(configuration)
 proxy_file = proxy_manager.generate_proxy()
