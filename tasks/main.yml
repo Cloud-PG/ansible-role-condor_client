@@ -34,15 +34,17 @@
   template:
     src: "{{ item.source }}"
     dest: "{{ item.dest }}"
+    mode: 0777
   with_items:
     - { source: 'templates/condor_config', dest: '/etc/condor/condor_config' }
-    - { source: 'templates/get_proxy.py', dest: '/etc/condor/get_proxy.py' }
+    - { source: 'templates/get_proxy.py', dest: '/home/censtos/get_proxy.py' }
 
 - name: copy job example
   become: yes
   copy:
     src: "{{ item.source }}"
     dest: "{{ item.dest }}"
+    mode: 0777
   with_items:
-    - { source: 'files/simple-job.sh', dest: '/opt/simple-job.sh' }
-    - { source: 'files/simple-job.sub', dest: '/opt/simple-job.sub' }
+    - { source: 'files/simple-job.sh', dest: '/home/centos/simple-job.sh' }
+    - { source: 'files/simple-job.sub', dest: '/home/centos/simple-job.sub' }
