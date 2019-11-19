@@ -27,6 +27,7 @@
     - wn
     - condor-all-8.8.2-1.el7
     - ca_DODAS-TTS
+    - jq
     state: present
 
 - name: Compile condor client config and utilities

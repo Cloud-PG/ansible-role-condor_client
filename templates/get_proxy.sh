@@ -43,4 +43,4 @@ access_token=$(echo $result | jq -r .access_token)
 echo "export TOKEN=\"${access_token}\""
 export TOKEN="${access_token}"
 
-python /home/censtos/get_proxy.py
+python /home/centos/get_proxy.py
