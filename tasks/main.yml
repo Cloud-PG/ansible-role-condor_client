@@ -37,8 +37,8 @@
     mode: 0777
   with_items:
     - { source: 'templates/condor_config', dest: '/etc/condor/condor_config' }
-    - { source: 'templates/get_proxy.py', dest: '/home/censtos/get_proxy.py' }
-    - { source: 'templates/get_proxy.sh', dest: '/home/censtos/get_proxy.sh' }
+    - { source: 'templates/get_proxy.py', dest: '/home/centos/get_proxy.py' }
+    - { source: 'templates/get_proxy.sh', dest: '/home/centos/get_proxy.sh' }
 
 - name: copy job example
   become: yes
