@@ -40,6 +40,8 @@ echo $result
 
 access_token=$(echo $result | jq -r .access_token)
 
+sed -e "s/user_token/${access_token}/" /home/centos/.dodas-template.yaml > /home/centos/.dodas.yaml
+
 echo "export TOKEN=\"${access_token}\""
 export TOKEN="${access_token}"
 
